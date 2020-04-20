@@ -1,8 +1,6 @@
 import React from 'react';
+import {render} from 'react-dom';
+import HomePage from "./components/HomePage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function About(props) {
-    return <h3>Hello World</h3>
-}
-
-export default About;
+render(<HomePage/>,document.getElementById('root'));
