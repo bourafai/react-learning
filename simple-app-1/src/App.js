@@ -5,7 +5,7 @@ import UsersPage from "./views/UsersPage";
 import AboutPage from "./views/AboutPage";
 import HomePage from "./views/HomePage";
 import Header from "./common/Header";
-import CoursesPage from "./views/CoursesPage";
+import CoursesPage from "./views/courses/CoursesPage";
 
 const App = () => {
     return (
