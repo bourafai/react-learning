@@ -39,7 +39,7 @@ const CoursesList = (props) => {
                 <Col sm={8}>
                     <Tab.Content>
                         {courses.map((value) => {
-                            let author = authors.find((o) => o.id === value.id);
+                            let author = authors.find((o) => o.id === value.authorId);
                             // console.log(author);
                             return (
                                 <CourseDetail
@@ -47,7 +47,7 @@ const CoursesList = (props) => {
                                     id={value.id}
                                     author={author}
                                     title={value.title}
-                                    description={value.title}
+                                    description={value.description}
                                 />
                             );
                         })}
