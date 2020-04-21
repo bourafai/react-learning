@@ -1,6 +1,6 @@
 import React from "react";
 import AboutPage from "./AboutPage";
-import NavBar from "./NavBar";
+import NavBar from "../common/NavBar";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 const HomePage = () => {
     return (

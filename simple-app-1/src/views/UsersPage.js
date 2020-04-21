@@ -2,7 +2,7 @@ import React from 'react';
 
 const UsersPage = () => {
     return (
-        <div>
+        <div className="container my-5">
             <ul>
                 <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, distinctio, iusto! Ad error
                     iusto nihil obcaecati placeat quam rem sequi sunt! Accusantium doloremque doloribus, facere pariatur
