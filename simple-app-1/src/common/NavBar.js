@@ -2,6 +2,8 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 
 const NavBar = () => {
+
+    const activeItemClasses = 'active alert-dark mx-1 nav-link rounded';
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="#">Aymene App</a>
@@ -14,16 +16,24 @@ const NavBar = () => {
                 <nav>
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/">Home</NavLink>
+                            <NavLink exact activeClassName={activeItemClasses} className="nav-link"
+                                     to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink activeClassName="active" className="nav-link" to="/about">About</NavLink>
+                            <NavLink activeClassName={activeItemClasses} className="nav-link"
+                                     to="/about">About</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink activeClassName="active" className="nav-link" to="/users">Users</NavLink>
+                            <NavLink activeClassName={activeItemClasses} className="nav-link"
+                                     to="/users">Users</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink activeClassName="active" className="nav-link" to="/courses">Courses</NavLink>
+                            <NavLink activeClassName={activeItemClasses} className="nav-link"
+                                     to="/contact">Contact</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink activeClassName={activeItemClasses} className="nav-link"
+                                     to="/courses">Courses</NavLink>
                         </li>
                     </ul>
                 </nav>
