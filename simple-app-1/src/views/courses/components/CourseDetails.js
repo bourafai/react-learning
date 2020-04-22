@@ -3,7 +3,7 @@ import {Tab} from "react-bootstrap";
 
 const CourseDetails = (props) => {
     return (
-        <Tab.Pane key={props.id} eventKey={"#" + props.id}>
+        <Tab.Pane key="0" eventKey={"#" + props.id}>
             <h4>{props.title}</h4>
             <br/>
             <small>{(typeof props.author !== 'undefined') ?
