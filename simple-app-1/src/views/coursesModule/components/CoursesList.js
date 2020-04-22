@@ -2,6 +2,7 @@ import React from "react";
 import {Col, ListGroup, Row, Tab} from "react-bootstrap";
 import CourseItem from "./CourseItem";
 import CourseDetails from "./CourseDetails";
+import PropTypes from "prop-types";
 
 const CoursesList = (props) => {
     return (
@@ -40,6 +41,21 @@ const CoursesList = (props) => {
             </Row>
         </Tab.Container>
     );
+};
+
+//validation with prop types
+CoursesList.propTypes = {
+    courses: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        authorId: PropTypes.number.isRequired,
+        category: PropTypes.string.isRequired
+    })).isRequired
+};
+// if the courses are undefined, the default value will be empty array
+CoursesList.defaultProps = {
+    courses: []
 };
 
 export default CoursesList;

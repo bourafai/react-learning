@@ -1,18 +1,16 @@
 import React from 'react';
-import NavBar from "./common/NavBar";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import UsersPage from "./views/UsersPage";
 import AboutPage from "./views/AboutPage";
 import HomePage from "./views/HomePage";
 import Header from "./common/Header";
-import CoursesPage from "./views/courses/CoursesPage";
+import CoursesPage from "./views/coursesModule/CoursesPage";
 
 const App = () => {
     return (
         <Router>
             <div>
                 <Header/>
-
                 <div className="page-container">
                     {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
