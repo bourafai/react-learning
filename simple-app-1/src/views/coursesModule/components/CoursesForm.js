@@ -1,42 +1,50 @@
-import React from 'react';
-import { Form, Tab} from "react-bootstrap";
-
+import React, {useState} from 'react';
+import {Button, Form} from "react-bootstrap";
+import PropTypes from 'prop-types';
 const CoursesForm = (props) => {
-    console.log(props.formStatus);
+    console.log(props);
+    const [title, setTitle] = useState(props.fill.title);
     return (
-        <Tab.Pane key={props.id} eventKey="#form">
-            <Form>
-                <Form.Group controlId="exampleForm.ControlInput1">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="name@example.com" />
-                </Form.Group>
-                <Form.Group controlId="exampleForm.ControlSelect1">
-                    <Form.Label>Example select</Form.Label>
-                    <Form.Control as="select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Group controlId="exampleForm.ControlSelect2">
-                    <Form.Label>Example multiple select</Form.Label>
-                    <Form.Control as="select" multiple>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </Form.Control>
-                </Form.Group>
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Example textarea</Form.Label>
-                    <Form.Control as="textarea" rows="3" />
-                </Form.Group>
-            </Form>
-        </Tab.Pane>
+        <Form className="border p-5 rounded shadow m-5">
+            <Form.Group controlId="title">
+                <Form.Label>Course title</Form.Label>
+                <Form.Control type="text" placeholder="Course title" value={title}
+                              onChange={event => setTitle(event.target.value)}/>
+            </Form.Group>
+            <Form.Group controlId="category">
+                <Form.Label>Category</Form.Label>
+                <Form.Control as="select">
+                    <option>Javascript</option>
+                    <option>React</option>
+                    <option>Software Architecture</option>
+                    <option>HTML 5</option>
+                    <option>CSS 3</option>
+                </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="description">
+                <Form.Label>Description</Form.Label>
+                <Form.Control as="textarea" rows="3"/>
+            </Form.Group>
+            <Form.Group controlId="submit">
+                <Button variant="primary" className="btn-block btn-lg" type="submit">
+                    Create new course
+                </Button>
+            </Form.Group>
+        </Form>
     );
+};
+
+CoursesForm.propTypes = {
+    fill: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        // : PropTypes.string.isRequired,
+    }),
+};
+CoursesForm.defaultProps = {
+    fill: {
+        title: 'lol',
+    }
+    // : PropTypes.string.isRequired,
 };
 
 export default CoursesForm;

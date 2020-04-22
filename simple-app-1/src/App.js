@@ -7,9 +7,9 @@ import Navigation from "./api/Navigation";
 const App = () => {
     const defaultPages = [
         {path: "/about", component: "AboutPage"},
-        // {path: '/contact', component: 'ContactPage'},
+        {path: '/contact', component: 'ContactPage'},
         {path: "/courses", component: "CoursesPage"},
-        // {path: '/', component: 'HomePage'},
+        {path: '/', component: 'HomePage'},
     ];
     const nav = new Navigation(defaultPages);
     return (
@@ -19,7 +19,7 @@ const App = () => {
                 {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
                 {nav.setRoutes()}
-                {nav.setRedirections()}
+                {/*{nav.setRedirections()}*/}
             </div>
         </div>
     );

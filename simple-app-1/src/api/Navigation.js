@@ -37,7 +37,7 @@ export default class Navigation {
 
     setRedirections(args) {
         return (
-            <Redirect from="about-page" to="about"/>
+            <Redirect exact from="/about-page" to="/about"/>
         );
     }
 }

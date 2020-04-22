@@ -1,4 +1,5 @@
-import { handleResponse, handleError } from "./apiUtils";
+import {handleError, handleResponse} from "./apiUtils";
+
 const baseUrl = process.env.REACT_APP_API_URL + "/courses/";
 
 export function getCourses() {

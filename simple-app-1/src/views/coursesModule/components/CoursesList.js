@@ -1,45 +1,55 @@
-import React from "react";
+import React, {useState} from "react";
 import {Col, ListGroup, Row, Tab} from "react-bootstrap";
 import CourseItem from "./CourseItem";
-import CourseDetails from "./CourseDetails";
 import PropTypes from "prop-types";
+import CoursesForm from "./CoursesForm";
+import PromptModal from "./PromptModal";
 
 const CoursesList = (props) => {
+
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
+    const onEdit = (e) => {
+        console.log(e.target.parentElement);
+        // handleForm();
+    };
+
+    const onDelete = (e) => {
+        handleShow(true);
+    };
+
     return (
-        <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
-            <Row>
-                <Col sm={4}>
-                    <ListGroup>
-                        {props.courses.map((value) => {
-                            return (
-                                <CourseItem
-                                    title={value.title}
-                                    key={value.id}
-                                    id={value.id}
-                                    cat={value.category}
-                                />
-                            );
-                        })}
-                    </ListGroup>
-                </Col>
-                <Col sm={8}>
-                    <Tab.Content>
-                        {props.courses.map((value) => {
-                            let author = props.authors.find((o) => o.id === value.authorId);
-                            return (
-                                <CourseDetails
-                                    key={value.id}
-                                    id={value.id}
-                                    author={author}
-                                    title={value.title}
-                                    description={value.description}
-                                />
-                            );
-                        })}
-                    </Tab.Content>
-                </Col>
-            </Row>
-        </Tab.Container>
+        <>
+
+            <PromptModal handleClose={handleClose} show={showModal}/>
+            <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
+                <Row>
+                    <Col sm={4}>
+                        <ListGroup>
+                            {props.courses.map((value) => {
+                                return (
+                                    <CourseItem
+                                        onEdit={onEdit}
+                                        onDelete={onDelete}
+                                        title={value.title}
+                                        key={value.id}
+                                        id={value.id}
+                                        cat={value.category}
+                                    />
+                                );
+                            })}
+                        </ListGroup>
+                    </Col>
+                    <Col sm={8}>
+                        <CoursesForm />
+                    </Col>
+                </Row>
+            </Tab.Container>
+        </>
     );
 };
 
