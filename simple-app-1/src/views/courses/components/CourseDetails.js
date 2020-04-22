@@ -1,7 +1,7 @@
 import React from 'react';
 import {Tab} from "react-bootstrap";
 
-const CourseDetail = (props) => {
+const CourseDetails = (props) => {
     return (
         <Tab.Pane key={props.id} eventKey={"#" + props.id}>
             <h4>{props.title}</h4>
@@ -13,4 +13,4 @@ const CourseDetail = (props) => {
     );
 };
 
-export default CourseDetail;
+export default CourseDetails;
