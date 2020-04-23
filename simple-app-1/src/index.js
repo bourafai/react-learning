@@ -4,4 +4,4 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router} from "react-router-dom";
 
-render(<Router><App/></Router>,document.getElementById('root'));
+render(<Router><App/></Router>, document.getElementById('root'));
