@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Form} from "react-bootstrap";
 import PropTypes from "prop-types";
+import {slugify} from '../../../scripts/utils';
 
 const CoursesForm = (props) => {
 	return (
-		<Form className="border p-5 rounded shadow m-5">
+		<Form className="border p-5 rounded shadow mx-5" onSubmit={props.onFormSubmit}>
 			<Form.Group controlId="title">
 				<Form.Label>Course title</Form.Label>
 				<Form.Control
@@ -14,13 +15,21 @@ const CoursesForm = (props) => {
 					value={props.course.title}
 					onChange={props.onFormChange}
 				/>
-				{/*
-            onChange={event => setTitle(event.target.value)}
-            */}
+				<Form.Text className="text-muted">
+					the course slug is : {slugify(props.course.title)}
+				</Form.Text>
+			</Form.Group>
+			<Form.Group controlId="category">
+				<Form.Label>Author</Form.Label>
+				<Form.Control name="authorId" as="select" required onChange={props.onFormChange}>
+					<option value="" defaultValue disabled >Choose</option>
+					{props.authors.map(value => <option value={Number(value.id)} key={value.id}>{value.name}</option>)}
+				</Form.Control>
 			</Form.Group>
 			<Form.Group controlId="category">
 				<Form.Label>Category</Form.Label>
-				<Form.Control name="category" as="select">
+				<Form.Control name="category" as="select" onChange={props.onFormChange}>
+					<option value="" defaultValue disabled hidden>Choose</option>
 					<option>Javascript</option>
 					<option>React</option>
 					<option>Software Architecture</option>
