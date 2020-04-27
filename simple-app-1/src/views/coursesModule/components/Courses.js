@@ -3,7 +3,7 @@ import {Col, Row, Tab} from "react-bootstrap";
 import CoursesForm from "./CoursesForm";
 import {slugify} from '../../../scripts/utils';
 import CoursesList from "./CoursesList";
-import {ToastProvider, useToasts} from 'react-toast-notifications';
+import {useToasts} from 'react-toast-notifications';
 
 const Courses = (props) => {
 

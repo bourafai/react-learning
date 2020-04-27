@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-import {Col, Container, Jumbotron} from "react-bootstrap";
+import {Container, Jumbotron} from "react-bootstrap";
 import Courses from "./components/Courses";
 import {getCourses, saveCourse} from "../../api/courseApi";
 import {getAuthors} from "../../api/authorApi";
