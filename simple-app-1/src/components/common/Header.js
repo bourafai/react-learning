@@ -1,13 +1,23 @@
-import React from 'react';
-import NavBar from "./NavBar";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-const Header = () => {
-	return (
-		<div className="border-bottom">
-			<NavBar/>
-			<h4>i am header</h4>
-		</div>
-	);
-};
+function Header() {
+  const activeStyle = { color: "orange" };
+  return (
+    <nav>
+      <NavLink activeStyle={activeStyle} exact to="/">
+        Home
+      </NavLink>
+      {" | "}
+      <NavLink activeStyle={activeStyle} to="/courses">
+        Courses
+      </NavLink>
+      {" | "}
+      <NavLink activeStyle={activeStyle} to="/about">
+        About
+      </NavLink>
+    </nav>
+  );
+}
 
 export default Header;
