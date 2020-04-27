@@ -3,6 +3,7 @@ import {Col, Row, Tab} from "react-bootstrap";
 import CoursesForm from "./CoursesForm";
 import {slugify} from '../../../scripts/utils';
 import CoursesList from "./CoursesList";
+import {ToastProvider, useToasts} from 'react-toast-notifications';
 
 const Courses = (props) => {
 
@@ -14,6 +15,8 @@ const Courses = (props) => {
 		authorId: 1,
 		category: 'Javascript',
 	});
+
+	const {addToast} = useToasts();
 
 	const handleFormChange = (event) => {
 		const updatedCourse = {...course, [event.target.name]: event.target.value};
@@ -28,15 +31,29 @@ const Courses = (props) => {
 		setCourse(updatedCourse);
 	};
 
-	const handleFormSubmit = (event) => {
+	const handleFormSubmit = async (event) => {
 		event.preventDefault();
-		props.addCourse(course);
+
+		const {error} = await props.addCourse(course);
+		if (error) {
+			alert('error');
+			addToast(error.message, {appearance: 'error'})
+		} else {
+			props.addCourse(course).then((_course) => {
+				const oldCourses = [_course, ...props.courses];
+				props.setCourses(oldCourses);
+			});
+			addToast('Saved Successfully', {appearance: 'success'})
+		}
+
+
 	};
 
 	const handleEditCourse = (event) => {
 		console.log(event.target.closest('.list-group-item'));
 		// handleForm();
 	};
+
 
 	return (
 		<>
@@ -48,8 +65,10 @@ const Courses = (props) => {
 
 					</Col>
 					<Col sm={8}>
+
 						<CoursesForm authors={props.authors} course={course} onFormChange={handleFormChange}
 						             onFormSubmit={handleFormSubmit}/>
+
 					</Col>
 				</Row>
 			</Tab.Container>

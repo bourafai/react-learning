@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {slugify} from '../../../scripts/utils';
 
 const CoursesForm = (props) => {
+
 	return (
 		<Form className="border p-5 rounded shadow mx-5" onSubmit={props.onFormSubmit}>
 			<Form.Group controlId="title">
@@ -22,7 +23,7 @@ const CoursesForm = (props) => {
 			<Form.Group controlId="category">
 				<Form.Label>Author</Form.Label>
 				<Form.Control name="authorId" as="select" required onChange={props.onFormChange}>
-					<option value="" defaultValue disabled >Choose</option>
+					<option value="" defaultValue disabled>Choose</option>
 					{props.authors.map(value => <option value={Number(value.id)} key={value.id}>{value.name}</option>)}
 				</Form.Control>
 			</Form.Group>

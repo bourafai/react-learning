@@ -1,21 +1,16 @@
 import React, {useEffect, useState} from "react";
 
-import {Container, Jumbotron} from "react-bootstrap";
+import {Col, Container, Jumbotron} from "react-bootstrap";
 import Courses from "./components/Courses";
-import {getCourses,saveCourse} from "../../api/courseApi";
+import {getCourses, saveCourse} from "../../api/courseApi";
 import {getAuthors} from "../../api/authorApi";
+import {ToastProvider} from "react-toast-notifications";
 
 
 const CoursesPage = () => {
 	const [courses, setCourses] = useState([]);
 	const [authors, setAuthors] = useState([]);
 
-	const addCourse = (course) => {
-		saveCourse(course).then((_course) => {
-			const oldCourses = [_course, ...courses];
-			setCourses(oldCourses);
-		});
-	};
 	//to avoid infinite loop :
 	//declare a second argument : the dependency array
 	//to tell useEffect when rerun
@@ -33,7 +28,9 @@ const CoursesPage = () => {
 			</Jumbotron>
 
 			<Container fluid="lg">
-				<Courses addCourse={addCourse} courses={courses} authors={authors}/>
+				<ToastProvider>
+					<Courses addCourse={saveCourse} setCourses={setCourses} courses={courses} authors={authors}/>
+				</ToastProvider>
 			</Container>
 		</div>
 	);
