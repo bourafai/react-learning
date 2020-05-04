@@ -53,6 +53,11 @@ const CoursesForm = (props) => {
 					Create new course
 				</Button>
 			</Form.Group>
+			<Form.Group controlId="reset">
+				<Button variant="outline-secondary" className="btn-block" onClick={props.handleReset}>
+					Reset
+				</Button>
+			</Form.Group>
 		</Form>
 	);
 };

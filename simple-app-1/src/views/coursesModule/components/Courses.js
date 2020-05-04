@@ -1,20 +1,20 @@
 import React, {useState} from "react";
-import {Col, Row, Tab} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import CoursesForm from "./CoursesForm";
 import {slugify} from '../../../scripts/utils';
 import CoursesList from "./CoursesList";
 import {useToasts} from 'react-toast-notifications';
 
 const Courses = (props) => {
-
-	const [course, setCourse] = useState({
+	const defaultCourse = {
 		// id: 0,
 		title: '',
 		slug: '',
 		description: '',
 		authorId: 1,
 		category: 'Javascript',
-	});
+	};
+	const [course, setCourse] = useState(defaultCourse);
 
 	const {addToast} = useToasts();
 
@@ -29,6 +29,10 @@ const Courses = (props) => {
 		}
 		// console.log(updatedCourse)
 		setCourse(updatedCourse);
+	};
+
+	const handleFormReset = () => {
+		setCourse(defaultCourse);
 	};
 
 	const handleFormSubmit = async (event) => {
@@ -62,9 +66,10 @@ const Courses = (props) => {
 	};
 
 	const renderCoursesList = () => {
-		if (props.courses.length === 0) return <h3>No Courses available</h3>
+		if (props.courses.length === 0) return <h3>No Courses available</h3>;
 		return <CoursesList courses={props.courses} onEdit={handleEditCourse} onDelete={handleDeleteCourse}/>;
-	}
+	};
+
 	return (
 		<>
 
@@ -74,9 +79,13 @@ const Courses = (props) => {
 				</Col>
 				<Col sm={8}>
 
-					<CoursesForm authors={props.authors} course={course} onFormChange={handleFormChange}
-					             onFormSubmit={handleFormSubmit}/>
-
+					<CoursesForm
+						authors={props.authors}
+						course={course}
+						onFormChange={handleFormChange}
+						onFormSubmit={handleFormSubmit}
+						handleReset={handleFormReset}
+					/>
 				</Col>
 			</Row>
 		</>
