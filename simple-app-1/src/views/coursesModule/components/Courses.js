@@ -20,7 +20,6 @@ const Courses = (props) => {
 
 	const handleFormChange = (event) => {
 		const updatedCourse = {...course, [event.target.name]: event.target.value};
-		console.log('updatedCourse', updatedCourse);
 		if (event.target.name === 'title') {
 			updatedCourse.slug = slugify(event.target.value);
 		}
@@ -36,11 +35,14 @@ const Courses = (props) => {
 	};
 
 	const editCourse = () => {
-		console.log(course);
+		let oldCourses = [...props.courses];
+		let editedIndex = oldCourses.findIndex((e) => e.id === course.id);
+		oldCourses[editedIndex] = course;
+		props.setCourses(oldCourses);
+		console.log(props.courses[editedIndex]);
 	};
 
 	const createNewCourse = async () => {
-		console.log(course);
 		const {error} = await props.addCourse(course);
 		if (error) {
 			alert('error');
@@ -54,6 +56,7 @@ const Courses = (props) => {
 			setCourse(defaultCourse);
 		}
 	};
+
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
 		(course.id !== undefined) ? editCourse() : createNewCourse();

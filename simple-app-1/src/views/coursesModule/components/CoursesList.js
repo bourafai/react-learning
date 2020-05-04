@@ -4,6 +4,7 @@ import {ListGroup} from "react-bootstrap";
 import PromptModal from "./PromptModal";
 
 const CoursesList = (props) => {
+	console.log(props.courses);
 	const [showModal, setShowModal] = useState(false);
 	const handleClose = () => setShowModal(false);
 	const handleShow = () => setShowModal(true);
