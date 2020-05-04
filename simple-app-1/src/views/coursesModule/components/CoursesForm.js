@@ -49,8 +49,8 @@ const CoursesForm = (props) => {
 				/>
 			</Form.Group>
 			<Form.Group controlId="submit">
-				<Button variant="primary" className="btn-block btn-lg" type="submit">
-					Create new course
+				<Button variant={undefined === props.course.id ? 'success' : 'primary' } className="btn-block btn-lg" type="submit">
+					{undefined === props.course.id ? 'Create new course' : 'Edit Course' }
 				</Button>
 			</Form.Group>
 			<Form.Group controlId="reset">

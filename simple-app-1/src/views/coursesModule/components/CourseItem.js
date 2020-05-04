@@ -15,7 +15,7 @@ const CourseItem = (props) => {
 				</div>
 			</div>
 			<div className="d-flex justify-content-end">
-				<button className="btn btn-sm btn-info" onClick={props.onEdit}>Edit</button>
+				<button className="btn btn-sm btn-info" onClick={()=> props.onEdit(props.id)}>Edit</button>
 				<button className="btn btn-sm btn-danger ml-2" onClick={()=> props.onDelete(props.id)}>Delete</button>
 			</div>
 		</ListGroup.Item>

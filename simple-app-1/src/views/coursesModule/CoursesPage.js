@@ -28,7 +28,7 @@ const CoursesPage = () => {
 			</Jumbotron>
 
 			<Container fluid="lg">
-				<ToastProvider>
+				<ToastProvider autoDismiss="true">
 					<Courses addCourse={saveCourse} setCourses={setCourses} courses={courses} authors={authors}/>
 				</ToastProvider>
 			</Container>

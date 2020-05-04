@@ -27,17 +27,20 @@ const Courses = (props) => {
 		if (event.target.name === 'authorId') {
 			updatedCourse.authorId = Number(event.target.value);
 		}
-		// console.log(updatedCourse)
 		setCourse(updatedCourse);
 	};
 
 	const handleFormReset = () => {
 		setCourse(defaultCourse);
+		addToast('Form reset', {appearance: 'info'})
 	};
 
-	const handleFormSubmit = async (event) => {
-		event.preventDefault();
+	const editCourse = () => {
+		console.log(course);
+	};
 
+	const createNewCourse = async () => {
+		console.log(course);
 		const {error} = await props.addCourse(course);
 		if (error) {
 			alert('error');
@@ -47,22 +50,27 @@ const Courses = (props) => {
 				const oldCourses = [_course, ...props.courses];
 				props.setCourses(oldCourses);
 			});
-			addToast('Saved Successfully', {appearance: 'success'})
+			addToast('Saved Successfully', {appearance: 'success'});
+			setCourse(defaultCourse);
 		}
-
-
+	};
+	const handleFormSubmit = (event) => {
+		event.preventDefault();
+		(course.id !== undefined) ? editCourse() : createNewCourse();
 	};
 
-	const handleEditCourse = (event) => {
-		console.log(event.target.closest('.list-group-item'));
-		// handleForm();
+	const handleEditCourse = (id) => {
+		let item = props.courses.filter((item) => item.id === id ? item : false)[0];
+		setCourse(item);
 	};
+
 	const handleDeleteCourse = (id) => {
 		let tempCourses = props.courses.reduce((items, course) => {
 			if (course.id !== id) items.push(course);
 			return items;
 		}, []);
 		props.setCourses(tempCourses);
+		addToast('Course deleted', {appearance: 'warning'})
 	};
 
 	const renderCoursesList = () => {
