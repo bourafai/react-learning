@@ -53,10 +53,9 @@ const Courses = (props) => {
 		console.log(event.target.closest('.list-group-item'));
 		// handleForm();
 	};
-	const handleDeleteCourse = (event) => {
-		let NodeId = event.currentTarget.closest('.list-group-item').getAttributeNode("data-rb-event-key").value.substr(1);
+	const handleDeleteCourse = (id) => {
 		let tempCourses = props.courses.reduce((items, course) => {
-			if (course.id !== (NodeId * 1)) items.push(course);
+			if (course.id !== id) items.push(course);
 			return items;
 		}, []);
 		props.setCourses(tempCourses);
