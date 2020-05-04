@@ -4,7 +4,7 @@ import {ListGroup} from "react-bootstrap";
 const CourseItem = (props) => {
 	const [title, setTitle] = useState(props.title);
 	return (
-		<ListGroup.Item key={props.id} href={"#" + props.id}>
+		<ListGroup.Item href={"#" + props.id}>
 			<div className="d-flex w-100 justify-content-between">
 				{/*<Link to={"/course/" + props.id}></Link>*/}
 				<div className="left">

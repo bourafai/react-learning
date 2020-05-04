@@ -8,10 +8,6 @@ const CoursesList = (props) => {
 	const handleClose = () => setShowModal(false);
 	const handleShow = () => setShowModal(true);
 
-	const handleDeleteCourse = (e) => {
-		handleShow(true);
-	};
-
 	return (
 		<>
 			<PromptModal handleClose={handleClose} show={showModal}/>

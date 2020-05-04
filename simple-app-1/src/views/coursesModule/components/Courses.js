@@ -53,27 +53,33 @@ const Courses = (props) => {
 		console.log(event.target.closest('.list-group-item'));
 		// handleForm();
 	};
+	const handleDeleteCourse = (event) => {
+		let NodeId = event.currentTarget.closest('.list-group-item').getAttributeNode("data-rb-event-key").value.substr(1);
+		let tempCourses = props.courses.reduce((items, course) => {
+			if (course.id !== (NodeId * 1)) items.push(course);
+			return items;
+		}, []);
+		props.setCourses(tempCourses);
+	};
 
 	const renderCoursesList = () => {
-		if(props.courses.length === 0) return <h3>No Courses available</h3>
-		return <CoursesList courses={props.courses} onEdit={handleEditCourse} onDelete={handleEditCourse}/>;
+		if (props.courses.length === 0) return <h3>No Courses available</h3>
+		return <CoursesList courses={props.courses} onEdit={handleEditCourse} onDelete={handleDeleteCourse}/>;
 	}
 	return (
 		<>
 
-			<Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
-				<Row>
-					<Col sm={4}>
-						{renderCoursesList()}
-					</Col>
-					<Col sm={8}>
+			<Row>
+				<Col sm={4}>
+					{renderCoursesList()}
+				</Col>
+				<Col sm={8}>
 
-						<CoursesForm authors={props.authors} course={course} onFormChange={handleFormChange}
-						             onFormSubmit={handleFormSubmit}/>
+					<CoursesForm authors={props.authors} course={course} onFormChange={handleFormChange}
+					             onFormSubmit={handleFormSubmit}/>
 
-					</Col>
-				</Row>
-			</Tab.Container>
+				</Col>
+			</Row>
 		</>
 	);
 };
