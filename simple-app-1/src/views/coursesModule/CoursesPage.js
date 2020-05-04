@@ -24,7 +24,7 @@ const CoursesPage = () => {
 	return (
 		<div>
 			<Jumbotron className="d-flex justify-content-between">
-				<h3>Hello courses</h3>
+				<h3>Courses Page</h3>
 			</Jumbotron>
 
 			<Container fluid="lg">

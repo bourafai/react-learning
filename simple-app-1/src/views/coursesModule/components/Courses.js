@@ -54,15 +54,17 @@ const Courses = (props) => {
 		// handleForm();
 	};
 
-
+	const renderCoursesList = () => {
+		if(props.courses.length === 0) return <h3>No Courses available</h3>
+		return <CoursesList courses={props.courses} onEdit={handleEditCourse} onDelete={handleEditCourse}/>;
+	}
 	return (
 		<>
 
 			<Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
 				<Row>
 					<Col sm={4}>
-						<CoursesList courses={props.courses} onEdit={handleEditCourse} onDelete={handleEditCourse}/>
-
+						{renderCoursesList()}
 					</Col>
 					<Col sm={8}>
 
