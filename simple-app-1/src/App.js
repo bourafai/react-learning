@@ -3,6 +3,7 @@ import AboutPage from "./views/AboutPage";
 import Header from "./components/common/Header";
 import CoursesPage from "./views/coursesModule/CoursesPage";
 import Navigation from "./api/Navigation";
+import 'font-awesome/css/font-awesome.min.css';
 
 const App = () => {
 	const defaultPages = [
