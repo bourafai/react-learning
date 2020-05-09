@@ -6,6 +6,7 @@ import "font-awesome/css/font-awesome.min.css";
 import AboutPage from "./views/AboutPage";
 import ContactPage from "./views/ContactPage";
 import CoursesPage from "./views/coursesModule/CoursesPage";
+import CartPage from "./views/CartPage";
 
 const App = () => {
 	const navigationPages = [
@@ -13,7 +14,11 @@ const App = () => {
 		{path: "/contact", component: ContactPage, name: "Contact"},
 		{path: "/courses", component: CoursesPage, name: "Courses"},
 	];
-	const nav = new Navigation(navigationPages);
+	const routes = [
+		...navigationPages,
+		{path: "/cart", component: CartPage, name: "Cart"},
+	];
+	const nav = new Navigation(routes);
 	return (
 		<div>
 			<Header navigation={navigationPages}/>
