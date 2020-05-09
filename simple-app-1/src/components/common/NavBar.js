@@ -1,7 +1,7 @@
 import React from "react";
 import {Form, FormControl, NavDropdown, Nav, Navbar, Button} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
-
+import {RiShoppingCartLine, RiSearchLine} from "react-icons/ri";
 const NavBar = (props) => {
 	const activeItemClasses = "active alert-dark mx-1 nav-link rounded";
 	return (
@@ -30,10 +30,10 @@ const NavBar = (props) => {
 				</Nav>
 				<Form inline>
 					<FormControl type="text" placeholder="Search" className="mr-sm-2"/>
-					<Button variant="outline-success">Search</Button>
+					<Button variant="outline-success"><RiSearchLine/></Button>
 				</Form>
 				<NavLink to="/cart" title="View Cart" activeClassName="active"
-				         className="btn btn-outline-primary m-2 my-sm-0"><i className="fa fa-cart-arrow-down"/></NavLink>
+				         className="btn btn-outline-primary m-2 my-sm-0"><RiShoppingCartLine/></NavLink>
 			</Navbar.Collapse>
 		</Navbar>
 	);
