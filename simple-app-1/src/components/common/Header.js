@@ -1,10 +1,10 @@
 import React from 'react';
 import NavBar from "./NavBar";
 
-const Header = () => {
+const Header = (props) => {
 	return (
 		<div className="border-bottom">
-			<NavBar/>
+			<NavBar menuItems={props.navigation} />
 		</div>
 	);
 };

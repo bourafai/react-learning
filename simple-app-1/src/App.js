@@ -1,21 +1,22 @@
 import React from "react";
-import AboutPage from "./views/AboutPage";
 import Header from "./components/common/Header";
-import CoursesPage from "./views/coursesModule/CoursesPage";
 import Navigation from "./api/Navigation";
-import 'font-awesome/css/font-awesome.min.css';
+import "font-awesome/css/font-awesome.min.css";
+//load views
+import AboutPage from "./views/AboutPage";
+import ContactPage from "./views/ContactPage";
+import CoursesPage from "./views/coursesModule/CoursesPage";
 
 const App = () => {
-	const defaultPages = [
-		{path: "/about", component: "AboutPage"},
-		{path: '/contact', component: 'ContactPage'},
-		{path: "/courses", component: "CoursesPage"},
-		{path: '/', component: 'HomePage'},
+	const navigationPages = [
+		{path: "/about", component: AboutPage, name: "About"},
+		{path: "/contact", component: ContactPage, name: "Contact"},
+		{path: "/courses", component: CoursesPage, name: "Courses"},
 	];
-	const nav = new Navigation(defaultPages);
+	const nav = new Navigation(navigationPages);
 	return (
 		<div>
-			<Header/>
+			<Header navigation={navigationPages}/>
 			<div className="page-container">
 				{/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
@@ -25,5 +26,4 @@ const App = () => {
 		</div>
 	);
 };
-
 export default App;
