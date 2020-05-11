@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 const Header = (props) => {
 	return (
 		<div className="border-bottom">
-			<NavBar menuItems={props.navigation} />
+			<NavBar shoppingState={props.shoppingState} menuItems={props.navigation} />
 		</div>
 	);
 };

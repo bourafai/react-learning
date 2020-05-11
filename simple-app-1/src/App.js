@@ -1,7 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "./components/common/Header";
 import Navigation from "./api/Navigation";
-import "font-awesome/css/font-awesome.min.css";
 //load views
 import AboutPage from "./views/AboutPage";
 import ContactPage from "./views/ContactPage";
@@ -9,6 +8,14 @@ import CoursesPage from "./views/coursesModule/CoursesPage";
 import CartPage from "./views/CartPage";
 
 const App = () => {
+
+	//defining states
+	const [shoppingState, setShoppingState] = useState({
+		itemsInCart: [4,2],
+		firstPurchase: true
+	});
+
+
 	const navigationPages = [
 		{path: "/about", component: AboutPage, name: "About"},
 		{path: "/contact", component: ContactPage, name: "Contact"},
@@ -16,12 +23,12 @@ const App = () => {
 	];
 	const routes = [
 		...navigationPages,
-		{path: "/cart", component: CartPage, name: "Cart"},
+		{path: "/cart", component: CartPage, name: "Cart", _props: shoppingState},
 	];
 	const nav = new Navigation(routes);
 	return (
 		<div>
-			<Header navigation={navigationPages}/>
+			<Header shoppingState={shoppingState} navigation={navigationPages}/>
 			<div className="page-container">
 				{/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}

@@ -1,9 +1,10 @@
 import React from 'react';
 
-const CartPage = () => {
+const CartPage = (props) => {
+	console.log(props);
 	return (
 		<div className="container my-5">
-			My Cart
+			My Cart having {props.itemsInCart.length} items
 		</div>
 	);
 };
