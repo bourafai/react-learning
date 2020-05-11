@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/esm/Modal";
 import {Button} from "react-bootstrap";
 
 const PromptModal = (props) => {
+	console.log(props);
 	return (
 		<Modal show={props.show} onHide={props.handleClose}>
 			<Modal.Header closeButton>
@@ -13,7 +14,7 @@ const PromptModal = (props) => {
 				<Button variant="secondary" onClick={props.handleClose}>
 					Close
 				</Button>
-				<Button variant="primary" onClick={props.handleClose}>
+				<Button variant="primary" onClick={props.handleConfirm}>
 					Save Changes
 				</Button>
 			</Modal.Footer>

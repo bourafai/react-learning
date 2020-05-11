@@ -1,17 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import CourseItem from "./CourseItem";
 import {ListGroup} from "react-bootstrap";
-import PromptModal from "./PromptModal";
 
 const CoursesList = (props) => {
-	console.log(props.courses);
-	const [showModal, setShowModal] = useState(false);
-	const handleClose = () => setShowModal(false);
-	const handleShow = () => setShowModal(true);
 
 	return (
 		<>
-			<PromptModal handleClose={handleClose} show={showModal}/>
 			<ListGroup className="shadow">
 				{props.courses.map((value) => {
 					return (
