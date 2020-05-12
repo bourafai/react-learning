@@ -2,20 +2,20 @@ import React from 'react';
 import CourseItem from "./CourseItem";
 import {ListGroup} from "react-bootstrap";
 
-const CoursesList = (props) => {
+const CoursesList = ({courses, onEdit, onDelete}) => {
 
 	return (
 		<>
 			<ListGroup className="shadow">
-				{props.courses.map((value) => {
+				{courses.map((course) => {
 					return (
 						<CourseItem
-							onEdit={props.onEdit}
-							onDelete={props.onDelete}
-							title={value.title}
-							key={value.id}
-							id={value.id}
-							cat={value.category}
+							onEdit={onEdit}
+							onDelete={onDelete}
+							title={course.title}
+							key={course.id}
+							id={course.id}
+							cat={course.category}
 						/>
 					);
 				})}

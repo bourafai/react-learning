@@ -6,7 +6,7 @@ import CoursesList from "./CoursesList";
 import {useToasts} from 'react-toast-notifications';
 import PromptModal from "./PromptModal";
 
-const Courses = (props) => {
+const Courses = ({courses, setCourses, addCourse, authors}) => {
 	const defaultCourse = {
 		// id: 0,
 		title: '',
@@ -43,21 +43,21 @@ const Courses = (props) => {
 	};
 
 	const editCourse = () => {
-		let oldCourses = [...props.courses];
+		let oldCourses = [...courses];
 		let editedIndex = oldCourses.findIndex((e) => e.id === course.id);
 		oldCourses[editedIndex] = course;
-		props.setCourses(oldCourses);
+		setCourses(oldCourses);
 	};
 
 	const createNewCourse = async () => {
-		const {error} = await props.addCourse(course);
+		const {error} = await addCourse(course);
 		if (error) {
 			alert('error');
 			addToast(error.message, {appearance: 'error'})
 		} else {
-			props.addCourse(course).then((_course) => {
-				const oldCourses = [_course, ...props.courses];
-				props.setCourses(oldCourses);
+			addCourse(course).then((_course) => {
+				const oldCourses = [_course, ...courses];
+				setCourses(oldCourses);
 			});
 			addToast('Saved Successfully', {appearance: 'success'});
 			setCourse(defaultCourse);
@@ -70,7 +70,7 @@ const Courses = (props) => {
 	};
 
 	const handleEditCourse = (id) => {
-		let item = props.courses.filter((item) => item.id === id ? item : false)[0];
+		let item = courses.filter((item) => item.id === id ? item : false)[0];
 		setCourse(item);
 	};
 
@@ -80,18 +80,18 @@ const Courses = (props) => {
 	};
 
 	const deleteCourse = () => {
-		let tempCourses = props.courses.reduce((items, course) => {
+		let tempCourses = courses.reduce((items, course) => {
 			if (course.id !== itemToDelete) items.push(course);
 			return items;
 		}, []);
-		props.setCourses(tempCourses);
+		setCourses(tempCourses);
 		handleCloseModal();
 		addToast('Course deleted', {appearance: 'warning'})
 	};
 
 	const renderCoursesList = () => {
-		if (props.courses.length === 0) return <h3>No Courses available</h3>;
-		return <CoursesList courses={props.courses} onEdit={handleEditCourse} onDelete={handleDeleteCourse}/>;
+		if (courses.length === 0) return <h3>No Courses available</h3>;
+		return <CoursesList courses={courses} onEdit={handleEditCourse} onDelete={handleDeleteCourse}/>;
 	};
 
 	return (
@@ -103,9 +103,8 @@ const Courses = (props) => {
 					{renderCoursesList()}
 				</Col>
 				<Col sm={8}>
-
 					<CoursesForm
-						authors={props.authors}
+						authors={authors}
 						course={course}
 						onFormChange={handleFormChange}
 						onFormSubmit={handleFormSubmit}

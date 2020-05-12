@@ -3,7 +3,7 @@ import {Badge, Button, Form, FormControl, Nav, Navbar, NavDropdown} from "react-
 import {NavLink} from "react-router-dom";
 import {RiSearchLine, RiShoppingCartLine} from "react-icons/ri";
 
-const NavBar = (props) => {
+const NavBar = ({shoppingState,menuItems}) => {
 	const activeItemClasses = "active alert-dark mx-1 nav-link rounded";
 
 	const renderCartButton = () => {
@@ -18,7 +18,7 @@ const NavBar = (props) => {
 					variant="danger"
 					style={{"marginLeft": "-5px", "minWidth": "19px"}}
 					className="rounded-pill">
-					{(typeof props.shoppingState.itemsInCart.length !== "undefined") ? props.shoppingState.itemsInCart.length : 0}
+					{(typeof shoppingState.itemsInCart.length !== "undefined") ? shoppingState.itemsInCart.length : 0}
 				</Badge>
 			</NavLink>
 		);
@@ -29,7 +29,7 @@ const NavBar = (props) => {
 		<Navbar.Toggle aria-controls="basic-navbar-nav"/>
 		<Navbar.Collapse id="basic-navbar-nav">
 			<Nav className="mr-auto">
-				{props.menuItems.map((item, index) => (<NavLink
+				{menuItems.map((item, index) => (<NavLink
 						key={index}
 						exact
 						activeClassName={activeItemClasses}
