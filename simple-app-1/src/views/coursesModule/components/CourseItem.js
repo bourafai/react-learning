@@ -1,6 +1,7 @@
 import React from 'react';
 import {ListGroup} from "react-bootstrap";
 import Liked from "../../../components/Liked";
+import PropTypes from "prop-types";
 
 const CourseItem = ({course, onEdit, onDelete, handleLike}) => {
 	return (
@@ -11,7 +12,7 @@ const CourseItem = ({course, onEdit, onDelete, handleLike}) => {
 					<Liked onClick={handleLike} course={course}/>
 					<h6 className="mb-1">{course.title}</h6>
 				</div>
-				<div className="right">
+				<div className="right" style={{minWidth: '20%', textAlign: 'right'}}>
 					<small>{course.category}</small>
 				</div>
 			</div>
@@ -21,6 +22,13 @@ const CourseItem = ({course, onEdit, onDelete, handleLike}) => {
 			</div>
 		</ListGroup.Item>
 	);
+};
+
+CourseItem.propTypes = {
+	course: PropTypes.object.isRequired,
+	onEdit: PropTypes.func.isRequired,
+	onDelete: PropTypes.func.isRequired,
+	handleLike: PropTypes.func.isRequired
 };
 
 export default CourseItem;

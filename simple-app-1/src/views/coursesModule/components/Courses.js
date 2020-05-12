@@ -5,6 +5,7 @@ import {slugify} from '../../../scripts/utils';
 import CoursesList from "./CoursesList";
 import {useToasts} from 'react-toast-notifications';
 import PromptModal from "./PromptModal";
+import PropTypes from "prop-types";
 
 const Courses = ({courses, setCourses, addCourse, authors}) => {
 	const defaultCourse = {
@@ -133,18 +134,18 @@ const Courses = ({courses, setCourses, addCourse, authors}) => {
 };
 
 //validation with prop types
-// Courses.propTypes = {
-// 	courses: PropTypes.arrayOf(PropTypes.shape({
-// 		id: PropTypes.number.isRequired,
-// 		title: PropTypes.string.isRequired,
-// 		description: PropTypes.string,
-// 		authorId: PropTypes.number.isRequired,
-// 		category: PropTypes.string.isRequired
-// 	})).isRequired
-// };
-// // if the courses are undefined, the default value will be empty array
-// Courses.defaultProps = {
-// 	courses: []
-// };
+Courses.propTypes = {
+	courses: PropTypes.arrayOf(PropTypes.shape({
+		id: PropTypes.number.isRequired,
+		title: PropTypes.string.isRequired,
+		description: PropTypes.string,
+		authorId: PropTypes.number.isRequired,
+		category: PropTypes.string.isRequired
+	})).isRequired
+};
+// if the courses are undefined, the default value will be empty array
+Courses.defaultProps = {
+	courses: []
+};
 
 export default Courses;
