@@ -17,7 +17,7 @@ const Courses = ({courses, setCourses, addCourse, authors}) => {
 		liked: false,
 	};
 	//updateCourse
-	const [course, setCourse] = useState(defaultCourse);
+	const [editedCourse, setEditedCourse] = useState(defaultCourse);
 	//state of courses to delete (we store IDs)
 	const [itemToDelete, setItemToDelete] = useState(0);
 
@@ -29,61 +29,61 @@ const Courses = ({courses, setCourses, addCourse, authors}) => {
 	const {addToast} = useToasts();
 
 	const handleFormChange = (event) => {
-		const updatedCourse = {...course, [event.target.name]: event.target.value};
+		const updatedCourse = {...editedCourse, [event.target.name]: event.target.value};
 		if (event.target.name === 'title') {
 			updatedCourse.slug = slugify(event.target.value);
 		}
 		if (event.target.name === 'authorId') {
 			updatedCourse.authorId = Number(event.target.value);
 		}
-		setCourse(updatedCourse);
+		setEditedCourse(updatedCourse);
 	};
 
 	const handleFormReset = () => {
-		setCourse(defaultCourse);
+		setEditedCourse(defaultCourse);
 		addToast('Form reset', {appearance: 'info'})
 	};
 
 	const editCourse = () => {
 		let oldCourses = [...courses];
-		let editedIndex = oldCourses.findIndex((e) => e.id === course.id);
-		oldCourses[editedIndex] = course;
+		let editedIndex = oldCourses.findIndex((e) => e.id === editedCourse.id);
+		oldCourses[editedIndex] = editedCourse;
 		setCourses(oldCourses);
 	};
 
 	const createNewCourse = async () => {
-		const {error} = await addCourse(course);
+		const {error} = await addCourse(editedCourse);
 		if (error) {
 			alert('error');
 			addToast(error.message, {appearance: 'error'})
 		} else {
-			addCourse(course).then((_course) => {
+			addCourse(editedCourse).then((_course) => {
 				const oldCourses = [_course, ...courses];
 				setCourses(oldCourses);
 			});
 			addToast('Saved Successfully', {appearance: 'success'});
-			setCourse(defaultCourse);
+			setEditedCourse(defaultCourse);
 		}
 	};
 
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
-		(course.id !== undefined) ? editCourse() : createNewCourse();
+		(editedCourse.id !== undefined) ? editCourse() : createNewCourse();
 	};
 
-	const handleEditCourse = (id) => {
-		let item = courses.filter((item) => item.id === id ? item : false)[0];
-		setCourse(item);
+	const handleEditCourse = (course) => {
+		let item = courses.filter((item) => item.id === course.id ? item : false)[0];
+		setEditedCourse(item);
 	};
 
-	const handleDeleteCourse = (id) => {
-		setItemToDelete(() => id);
+	const handleDeleteCourse = (course) => {
+		setItemToDelete(() => course);
 		handleShowModal();
 	};
 
 	const deleteCourse = () => {
 		let tempCourses = courses.reduce((items, course) => {
-			if (course.id !== itemToDelete) items.push(course);
+			if (course !== itemToDelete) items.push(course);
 			return items;
 		}, []);
 		setCourses(tempCourses);
@@ -91,14 +91,14 @@ const Courses = ({courses, setCourses, addCourse, authors}) => {
 		addToast('Course deleted', {appearance: 'warning'})
 	};
 
-	const handleLike = (id) => {
+	const handleLike = (course) => {
 		let oldCourses = [...courses];
-		let editedIndex = oldCourses.findIndex((e) => e.id === id);
+		let editedIndex = oldCourses.findIndex((e) => e.id === course.id);
 		oldCourses[editedIndex].liked = !oldCourses[editedIndex].liked;
 		setCourses(oldCourses);
-		if(courses[editedIndex].liked === true){
+		if (courses[editedIndex].liked === true) {
 			addToast('the course is added to your favorites', {appearance: 'info'});
-		}else{
+		} else {
 			addToast('the course is removed from your favorites', {appearance: 'info'});
 		}
 	};
@@ -120,7 +120,7 @@ const Courses = ({courses, setCourses, addCourse, authors}) => {
 				<Col sm={8}>
 					<CoursesForm
 						authors={authors}
-						course={course}
+						course={editedCourse}
 						handleLike={handleLike}
 						onFormChange={handleFormChange}
 						onFormSubmit={handleFormSubmit}

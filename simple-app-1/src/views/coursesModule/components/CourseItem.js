@@ -8,7 +8,7 @@ const CourseItem = ({course, onEdit, onDelete, handleLike}) => {
 			<div className="d-flex w-100 justify-content-between">
 				{/*<Link to={"/course/" + id}></Link>*/}
 				<div className="left">
-					<Liked onClick={handleLike} liked={course.liked} courseId={course.id}/>
+					<Liked onClick={handleLike} course={course}/>
 					<h6 className="mb-1">{course.title}</h6>
 				</div>
 				<div className="right">
@@ -16,8 +16,8 @@ const CourseItem = ({course, onEdit, onDelete, handleLike}) => {
 				</div>
 			</div>
 			<div className="d-flex justify-content-end">
-				<button className="btn btn-sm btn-info" onClick={() => onEdit(course.id)}>Edit</button>
-				<button className="btn btn-sm btn-danger ml-2" onClick={() => onDelete(course.id)}>Delete</button>
+				<button className="btn btn-sm btn-info" onClick={() => onEdit(course)}>Edit</button>
+				<button className="btn btn-sm btn-danger ml-2" onClick={() => onDelete(course)}>Delete</button>
 			</div>
 		</ListGroup.Item>
 	);
