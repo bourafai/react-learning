@@ -14,7 +14,9 @@ const Courses = ({courses, setCourses, addCourse, authors}) => {
 		description: '',
 		authorId: 1,
 		category: 'Javascript',
+		liked: false,
 	};
+	//updateCourse
 	const [course, setCourse] = useState(defaultCourse);
 	//state of courses to delete (we store IDs)
 	const [itemToDelete, setItemToDelete] = useState(0);
@@ -89,9 +91,22 @@ const Courses = ({courses, setCourses, addCourse, authors}) => {
 		addToast('Course deleted', {appearance: 'warning'})
 	};
 
+	const handleLike = (id) => {
+		let oldCourses = [...courses];
+		let editedIndex = oldCourses.findIndex((e) => e.id === id);
+		oldCourses[editedIndex].liked = !oldCourses[editedIndex].liked;
+		setCourses(oldCourses);
+		if(courses[editedIndex].liked === true){
+			addToast('the course is added to your favorites', {appearance: 'info'});
+		}else{
+			addToast('the course is removed from your favorites', {appearance: 'info'});
+		}
+	};
+
 	const renderCoursesList = () => {
 		if (courses.length === 0) return <h3>No Courses available</h3>;
-		return <CoursesList courses={courses} onEdit={handleEditCourse} onDelete={handleDeleteCourse}/>;
+		return <CoursesList handleLike={handleLike} courses={courses} onEdit={handleEditCourse}
+		                    onDelete={handleDeleteCourse}/>;
 	};
 
 	return (

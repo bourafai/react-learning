@@ -2,7 +2,7 @@ import React from 'react';
 import CourseItem from "./CourseItem";
 import {ListGroup} from "react-bootstrap";
 
-const CoursesList = ({courses, onEdit, onDelete}) => {
+const CoursesList = ({courses, onEdit, onDelete, handleLike}) => {
 
 	return (
 		<>
@@ -12,10 +12,9 @@ const CoursesList = ({courses, onEdit, onDelete}) => {
 						<CourseItem
 							onEdit={onEdit}
 							onDelete={onDelete}
-							title={course.title}
+							course={course}
 							key={course.id}
-							id={course.id}
-							cat={course.category}
+							handleLike={handleLike}
 						/>
 					);
 				})}
