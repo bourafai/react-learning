@@ -2,11 +2,13 @@ import React from "react";
 import {Button, Form} from "react-bootstrap";
 import PropTypes from "prop-types";
 import {slugify} from '../../../scripts/utils';
+import Liked from "../../../components/Liked";
 
-const CoursesForm = ({authors, course, onFormChange, onFormSubmit, handleReset}) => {
+const CoursesForm = ({authors, course, onFormChange, onFormSubmit, handleReset,handleLike}) => {
 
 	return (
 		<Form className="border p-5 rounded shadow mx-5" onSubmit={onFormSubmit}>
+			<Liked size="2rem" onClick={handleLike} liked={course.liked} courseId={course.id}/>
 			<Form.Group controlId="title">
 				<Form.Label>Course title</Form.Label>
 				<Form.Control

@@ -121,6 +121,7 @@ const Courses = ({courses, setCourses, addCourse, authors}) => {
 					<CoursesForm
 						authors={authors}
 						course={course}
+						handleLike={handleLike}
 						onFormChange={handleFormChange}
 						onFormSubmit={handleFormSubmit}
 						handleReset={handleFormReset}
