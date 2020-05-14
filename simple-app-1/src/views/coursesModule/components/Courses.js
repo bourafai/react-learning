@@ -1,13 +1,15 @@
-import React, {useState} from "react";
-import {Row} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
 import CoursesForm from "./CoursesForm";
 import {slugify} from '../../../scripts/utils';
 import CoursesList from "./CoursesList";
 import {useToasts} from 'react-toast-notifications';
 import PromptModal from "./PromptModal";
 import PropTypes from "prop-types";
+import PaginationManager from "../../../components/PaginationManager";
+import {Row} from "react-bootstrap";
 
-const Courses = ({isTableLayout, courses, setCourses, addCourse, authors}) => {
+const Courses = ({coursesPerPage, isTableLayout, courses, setCourses, addCourse, authors}) => {
+
 	const defaultCourse = {
 		// id: 0,
 		title: '',
@@ -21,6 +23,11 @@ const Courses = ({isTableLayout, courses, setCourses, addCourse, authors}) => {
 	const [editedCourse, setEditedCourse] = useState(defaultCourse);
 	//state of courses to delete (we store IDs)
 	const [itemToDelete, setItemToDelete] = useState(0);
+	const [pagedCourses, setPagedCourses] = useState([]);
+
+	useEffect(() => {
+		handlePagination(1);
+	}, [courses]);
 
 	//bootstrap modal
 	const [showModal, setShowModal] = useState(false);
@@ -89,6 +96,7 @@ const Courses = ({isTableLayout, courses, setCourses, addCourse, authors}) => {
 		}, []);
 		setCourses(tempCourses);
 		handleCloseModal();
+		handlePagination();
 		addToast('Course deleted', {appearance: 'warning'})
 	};
 
@@ -110,16 +118,16 @@ const Courses = ({isTableLayout, courses, setCourses, addCourse, authors}) => {
 			<CoursesList
 				isTableLayout={tableLayout}
 				handleLike={handleLike}
-				courses={courses}
+				// courses={courses}
+				courses={pagedCourses}
 				onEdit={handleEditCourse}
 				onDelete={handleDeleteCourse}/>
 		);
 	};
 
 	function renderCoursesForm(tableLayout) {
-		if(! tableLayout)
-		return (
-
+		if (!tableLayout)
+			return (
 				<CoursesForm
 					isTableLayout={tableLayout}
 					authors={authors}
@@ -129,18 +137,26 @@ const Courses = ({isTableLayout, courses, setCourses, addCourse, authors}) => {
 					onFormSubmit={handleFormSubmit}
 					handleReset={handleFormReset}
 				/>
-
-		);
+			);
 	}
+
+	function handlePagination(n) {
+		let min = coursesPerPage * (n - 1);
+		let max = coursesPerPage * n;
+		const c = courses.slice(min, max);
+		setPagedCourses(() => c);
+	}
+
 
 	return (
 		<>
 			<PromptModal toDelete={itemToDelete} handleConfirm={deleteCourse} handleClose={handleCloseModal}
 			             show={showModal}/>
 
-			<Row>
+			<Row className="d-flex justify-content-center">
 				{renderCoursesList(isTableLayout)}
 				{renderCoursesForm(isTableLayout)}
+				<PaginationManager handlePagination={handlePagination} pages={Math.ceil(courses.length / coursesPerPage)}/>
 			</Row>
 		</>
 	);

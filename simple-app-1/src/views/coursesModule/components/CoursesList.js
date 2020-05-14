@@ -3,7 +3,7 @@ import CourseItem from "./CourseItem";
 import {Col, ListGroup, Table} from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const renderTable = ({isTableLayout, courses, onEdit, onDelete, handleLike}) => {
+const renderTable = ({isTableLayout,pagedCourses , courses, onEdit, onDelete, handleLike}) => {
 	return (
 		<>
 			<Table striped bordered hover>

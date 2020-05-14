@@ -9,6 +9,7 @@ import {AiOutlineTable, AiOutlineUnorderedList} from "react-icons/ai";
 
 
 const CoursesPage = () => {
+	const coursesPerPage = 4;
 	const [courses, setCourses] = useState([]);
 	const [authors, setAuthors] = useState([]);
 	const [isTableLayout, setTableLayout] = useState(true);
@@ -41,6 +42,7 @@ const CoursesPage = () => {
 			<Container fluid="lg">
 				<ToastProvider autoDismiss="true">
 					<Courses
+						coursesPerPage={coursesPerPage}
 						isTableLayout={isTableLayout}
 						addCourse={saveCourse}
 						setCourses={setCourses}
