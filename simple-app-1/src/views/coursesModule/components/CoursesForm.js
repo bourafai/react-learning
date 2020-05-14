@@ -1,14 +1,13 @@
 import React from "react";
-import {Button, Form} from "react-bootstrap";
+import {Button, Col, Form} from "react-bootstrap";
 import PropTypes from "prop-types";
 import {slugify} from '../../../scripts/utils';
 import Liked from "../../../components/Liked";
 
-const CoursesForm = ({authors, course, onFormChange, onFormSubmit, handleReset,handleLike}) => {
-
+const renderFormContent = ({authors, course, onFormChange, onFormSubmit, handleReset, handleLike}) => {
 	return (
 		<Form className="border p-5 rounded shadow mx-5" onSubmit={onFormSubmit}>
-			<Liked size="2rem" onClick={handleLike} course={course} />
+			<Liked size="2rem" onClick={handleLike} course={course}/>
 			<Form.Group controlId="title">
 				<Form.Label>Course title</Form.Label>
 				<Form.Control
@@ -61,6 +60,15 @@ const CoursesForm = ({authors, course, onFormChange, onFormSubmit, handleReset,h
 				</Button>
 			</Form.Group>
 		</Form>
+	);
+};
+
+const CoursesForm = (props) => {
+
+	return (
+		<Col sm={8}>
+			{renderFormContent(props)}
+		</Col>
 	);
 };
 

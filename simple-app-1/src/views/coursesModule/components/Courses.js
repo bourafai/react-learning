@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Col, Row} from "react-bootstrap";
+import {Row} from "react-bootstrap";
 import CoursesForm from "./CoursesForm";
 import {slugify} from '../../../scripts/utils';
 import CoursesList from "./CoursesList";
@@ -7,7 +7,7 @@ import {useToasts} from 'react-toast-notifications';
 import PromptModal from "./PromptModal";
 import PropTypes from "prop-types";
 
-const Courses = ({courses, setCourses, addCourse, authors}) => {
+const Courses = ({isTableLayout, courses, setCourses, addCourse, authors}) => {
 	const defaultCourse = {
 		// id: 0,
 		title: '',
@@ -104,30 +104,43 @@ const Courses = ({courses, setCourses, addCourse, authors}) => {
 		}
 	};
 
-	const renderCoursesList = () => {
+	const renderCoursesList = (tableLayout = null) => {
 		if (courses.length === 0) return <h3>No Courses available</h3>;
-		return <CoursesList handleLike={handleLike} courses={courses} onEdit={handleEditCourse}
-		                    onDelete={handleDeleteCourse}/>;
+		return (
+			<CoursesList
+				isTableLayout={tableLayout}
+				handleLike={handleLike}
+				courses={courses}
+				onEdit={handleEditCourse}
+				onDelete={handleDeleteCourse}/>
+		);
 	};
+
+	function renderCoursesForm(tableLayout) {
+		if(! tableLayout)
+		return (
+
+				<CoursesForm
+					isTableLayout={tableLayout}
+					authors={authors}
+					course={editedCourse}
+					handleLike={handleLike}
+					onFormChange={handleFormChange}
+					onFormSubmit={handleFormSubmit}
+					handleReset={handleFormReset}
+				/>
+
+		);
+	}
 
 	return (
 		<>
 			<PromptModal toDelete={itemToDelete} handleConfirm={deleteCourse} handleClose={handleCloseModal}
 			             show={showModal}/>
+
 			<Row>
-				<Col sm={4}>
-					{renderCoursesList()}
-				</Col>
-				<Col sm={8}>
-					<CoursesForm
-						authors={authors}
-						course={editedCourse}
-						handleLike={handleLike}
-						onFormChange={handleFormChange}
-						onFormSubmit={handleFormSubmit}
-						handleReset={handleFormReset}
-					/>
-				</Col>
+				{renderCoursesList(isTableLayout)}
+				{renderCoursesForm(isTableLayout)}
 			</Row>
 		</>
 	);

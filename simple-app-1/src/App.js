@@ -5,6 +5,7 @@ import Navigation from "./api/Navigation";
 import AboutPage from "./views/AboutPage";
 import ContactPage from "./views/ContactPage";
 import CoursesPage from "./views/coursesModule/CoursesPage";
+import ManageCourse from "./views/coursesModule/ManageCoursePage";
 import CartPage from "./views/CartPage";
 
 const App = () => {
@@ -20,10 +21,12 @@ const App = () => {
 		{path: "/about", component: AboutPage, name: "About"},
 		{path: "/contact", component: ContactPage, name: "Contact"},
 		{path: "/courses", component: CoursesPage, name: "Courses"},
+		{path: "/courses", component: CoursesPage, name: "Courses"},
 	];
 	const routes = [
 		...navigationPages,
 		{path: "/cart", component: CartPage, name: "Cart", _props: shoppingState},
+		{path: "/course/:id", component: ManageCourse, name: "Manage courses", _props: shoppingState},
 	];
 	const nav = new Navigation(routes);
 	return (
